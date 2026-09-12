@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Objective Quiz</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#1f2937}
+header{background:#2563eb;color:white;padding:24px;text-align:center}
+.container{max-width:900px;margin:20px auto;padding:16px}
+#score{position:sticky;top:0;background:white;padding:14px;border-radius:12px;box-shadow:0 2px 10px #0001;margin-bottom:16px;font-weight:bold;z-index:2}
+.question{background:white;margin:14px 0;padding:20px;border-radius:14px;box-shadow:0 2px 10px #00000012}
+.question h3{margin-top:0;font-size:18px}
+.option{display:block;width:100%;text-align:left;margin:9px 0;padding:12px 14px;border:2px solid #d1d5db;border-radius:10px;background:white;font-size:16px;cursor:pointer}
+.option:hover{background:#f8fafc}
+.option.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#166534}
+.option.wrong{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b}
+.option:disabled{cursor:default}
+.feedback{margin-top:10px;font-weight:bold;padding:10px;border-radius:8px;display:none}
+.feedback.show{display:block}
+.feedback.good{background:#dcfce7;color:#166534}
+.feedback.bad{background:#fee2e2;color:#991b1b}
+button.reset{background:#2563eb;color:white;border:0;padding:13px 20px;border-radius:10px;font-size:16px;cursor:pointer;margin:18px 0 40px}
+footer{text-align:center;color:#6b7280;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>Science Objective Quiz</h1>
+<p>Electricity & Heating Effect • The Invisible Living World</p>
+<p>50 Questions | Instant Green/Red Result</p>
+</header>
+<div class="container">
+<div id="score">Score: <span id="correct">0</span> / 50 &nbsp; | &nbsp; Attempted: <span id="attempted">0</span> / 50</div>
+<div id="quiz"></div>
+<button class="reset" onclick="location.reload()">Restart Quiz</button>
+</div>
+<footer>Choose an option. Correct answers turn green. Wrong answers turn red and the correct answer is shown.</footer>
+
+<script>
+const questions = [{"q": "Which principle is used by an electric appliance such as an electric bell?", "options": ["Magnetic effect of current", "Thermal expansion", "Heating effect of current", "Chemical effect of current"], "answer": 0}, {"q": "Which of the following is a strong electromagnet arrangement?", "options": ["A coil without current", "A current-carrying coil with many turns", "A plastic wire", "A wooden rod"], "answer": 1}, {"q": "When electric current is passed through a conducting solution, there may be a change in:", "options": ["Colour of the solution", "Size of the battery", "Length of the wire", "Shape of the switch"], "answer": 0}, {"q": "Which of the following solutions conducts electricity?", "options": ["Vinegar", "Vegetable oil", "Pure distilled water", "Dry air"], "answer": 0}, {"q": "What is the function of zinc in a dry cell?", "options": ["Positive electrode", "Negative electrode", "Insulator", "Heating element"], "answer": 1}, {"q": "Which of the following is NOT based on the heating effect of electric current?", "options": ["Electric stove", "Geyser", "Electric bell", "Electric heater"], "answer": 2}, {"q": "Which material is commonly used as the core in electromagnets?", "options": ["Iron", "Copper", "Silver", "Aluminium"], "answer": 0}, {"q": "The strength of an electromagnet can be increased by:", "options": ["Using fewer turns in the coil", "Inserting an iron core", "Inserting a wooden core", "Decreasing current"], "answer": 1}, {"q": "A Voltaic cell works mainly due to:", "options": ["Chemical reactions", "Heating effect", "Magnetic effect", "Sound energy"], "answer": 0}, {"q": "Nichrome wire is commonly used in electrical heating devices because it:", "options": ["Is an insulator", "Generates more heat for a given current", "Has no resistance", "Is made of plastic"], "answer": 1}, {"q": "Which of the following works on the heating effect of electric current?", "options": ["Electric iron", "Compass", "Electromagnet", "Magnetic needle"], "answer": 0}, {"q": "A current-carrying coil behaves like a:", "options": ["Plastic object", "Magnet", "Insulator", "Non-metal"], "answer": 1}, {"q": "Which wire is commonly used as a heating element?", "options": ["Nichrome wire", "Plastic wire", "Cotton thread", "Rubber wire"], "answer": 0}, {"q": "Nichrome wire has high:", "options": ["Resistance", "Transparency", "Magnetism", "Elasticity"], "answer": 0}, {"q": "An electromagnet produces:", "options": ["Only heat", "A magnetic effect", "Only light", "Only sound"], "answer": 1}, {"q": "An electromagnet loses its magnetism when:", "options": ["Current is switched off", "Current is increased", "More turns are added", "An iron core is inserted"], "answer": 0}, {"q": "The strength of an electromagnet increases when:", "options": ["Current is increased", "Current is stopped", "The coil is removed", "A wooden core is used"], "answer": 0}, {"q": "The magnetic field around a current-carrying wire can be detected using a:", "options": ["Compass needle", "Thermometer", "Barometer", "Microscope"], "answer": 0}, {"q": "Deflection of a compass needle near a current-carrying wire shows the:", "options": ["Magnetic effect of current", "Chemical effect only", "Cooling effect", "No effect"], "answer": 0}, {"q": "A conducting solution may show a change in colour due to the:", "options": ["Chemical effect of electric current", "Gravitational effect", "Sound effect", "Cooling effect"], "answer": 0}, {"q": "Which of the following is generally a poor conductor of electricity?", "options": ["Vegetable oil", "Lemon juice", "Vinegar", "Salt solution"], "answer": 0}, {"q": "The solution used in a Voltaic cell is called:", "options": ["Electrolyte", "Filament", "Insulator", "Nucleoid"], "answer": 0}, {"q": "An electric bulb glows mainly because of the:", "options": ["Heating effect of current", "Magnetic effect only", "Chemical effect only", "Cooling effect"], "answer": 0}, {"q": "The material commonly used in bulb filaments is:", "options": ["Tungsten", "Plastic", "Rubber", "Wood"], "answer": 0}, {"q": "Which device protects electrical appliances from excessive current?", "options": ["Fuse", "Compass", "Electromagnet", "Voltaic cell"], "answer": 0}, {"q": "Which of the following is absent in a bacterial cell?", "options": ["Nucleoid", "Cell wall", "A true nucleus", "Cytoplasm"], "answer": 2}, {"q": "Which of the following is not considered a true microbe in this context?", "options": ["Protozoan", "Bacterium", "Fungus", "Virus"], "answer": 3}, {"q": "Which is the largest cell in the living world?", "options": ["Neuron", "Amoeba", "Ostrich egg", "Muscle cell"], "answer": 2}, {"q": "Thread-like structures inside the nucleus carrying genetic information are called:", "options": ["Genes", "Chromosomes", "Cytoplasm", "Ribosomes"], "answer": 1}, {"q": "Which microorganism helps in nitrogen fixation?", "options": ["Yeast", "Rhizobium", "Plasmodium", "Virus"], "answer": 1}, {"q": "Which of the following is not a unicellular organism?", "options": ["Amoeba", "Bread mould", "Yeast", "Lactobacillus"], "answer": 1}, {"q": "Bread dough or idli batter rises because of:", "options": ["Heat", "Grinding", "Kneading", "Growth of yeast cells"], "answer": 3}, {"q": "A microscope with very high magnification is called:", "options": ["Foldscope", "Electron microscope", "Hand lens", "Telescope"], "answer": 1}, {"q": "Which pigment gives plants their green colour and helps in photosynthesis?", "options": ["Haemoglobin", "Chlorophyll", "Safranin", "Methylene blue"], "answer": 1}, {"q": "A microorganism used in the production of alcohol is:", "options": ["Yeast", "Amoeba", "Virus", "Rhizobium"], "answer": 0}, {"q": "Amoeba is a:", "options": ["Protozoan", "Bacterium", "Virus", "Plant"], "answer": 0}, {"q": "Viruses are considered living only when they are:", "options": ["Inside a living host", "In water", "In air", "Under sunlight"], "answer": 0}, {"q": "Rhizobium bacteria commonly live in the roots of:", "options": ["Leguminous plants", "Only wheat plants", "Only maize plants", "Mosses"], "answer": 0}, {"q": "The green pigment chlorophyll helps plants in:", "options": ["Photosynthesis", "Digestion", "Movement", "Hearing"], "answer": 0}, {"q": "Which instrument is used to observe very small organisms?", "options": ["Microscope", "Telescope", "Compass", "Thermometer"], "answer": 0}, {"q": "Foldscope is a type of:", "options": ["Microscope", "Battery", "Magnet", "Heater"], "answer": 0}, {"q": "Which of the following is a staining agent used in biology?", "options": ["Safranin", "Vinegar", "Lemonade", "Curd"], "answer": 0}, {"q": "Which of the following can also be used for staining cells?", "options": ["Methylene blue", "Chlorophyll", "Vinegar", "Yeast"], "answer": 0}, {"q": "Which of the following is a microorganism?", "options": ["Bacteria", "Elephant", "Earthworm", "Ostrich"], "answer": 0}, {"q": "Curd is prepared with the help of:", "options": ["Bacteria", "Virus", "Earthworm", "Plant roots"], "answer": 0}, {"q": "The cell membrane is:", "options": ["Selectively permeable", "Completely impermeable", "A chromosome", "A true nucleus"], "answer": 0}, {"q": "Which structure controls the activities of a cell?", "options": ["Nucleus", "Cell wall", "Cytoplasm only", "Vacuole"], "answer": 0}, {"q": "Which statement about Amoeba is correct?", "options": ["It is a unicellular organism", "It is a multicellular plant", "It is a virus", "It has no cell"], "answer": 0}, {"q": "Which statement is correctly matched?", "options": ["Voltaic cell — Chemical reactions", "Nichrome wire — Insulator", "Yeast — Virus", "Electromagnet — Heating effect only"], "answer": 0}, {"q": "A current-carrying coil becomes an electromagnet when it carries:", "options": ["Electric current", "Only heat", "Only light", "Only air"], "answer": 0}];
+let correct=0, attempted=0;
+const quiz=document.getElementById('quiz');
+
+questions.forEach((item,index)=>{
+  const box=document.createElement('div');
+  box.className='question';
+  box.innerHTML=`<h3>${index+1}. ${item.q}</h3>`;
+  item.options.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='option';
+    b.innerHTML=`${String.fromCharCode(65+i)}. ${opt}`;
+    b.onclick=()=>answer(index,i,box);
+    box.appendChild(b);
+  });
+  const feedback=document.createElement('div');
+  feedback.className='feedback';
+  box.appendChild(feedback);
+  quiz.appendChild(box);
+});
+
+function answer(qIndex,chosen,box){
+  if(box.dataset.done) return;
+  box.dataset.done='1';
+  attempted++;
+  const item=questions[qIndex];
+  const buttons=box.querySelectorAll('.option');
+  const feedback=box.querySelector('.feedback');
+
+  buttons.forEach((b,i)=>{
+    b.disabled=true;
+    if(i===item.answer) b.classList.add('correct');
+  });
+
+  if(chosen===item.answer){
+    correct++;
+    feedback.textContent='✓ Correct Answer!';
+    feedback.className='feedback show good';
+  } else {
+    buttons[chosen].classList.add('wrong');
+    feedback.textContent='✗ Wrong Answer. Correct answer: '+String.fromCharCode(65+item.answer)+'. '+item.options[item.answer];
+    feedback.className='feedback show bad';
+  }
+
+  document.getElementById('correct').textContent=correct;
+  document.getElementById('attempted').textContent=attempted;
+}
+</script>
+</body>
+</html>
